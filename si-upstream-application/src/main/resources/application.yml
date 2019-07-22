@@ -1,0 +1,42 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: si-upstream
+  datasource:
+    url: jdbc:mysql://192.168.21.112:3306/si_upstream?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root123
+
+si-upstream:
+  wcs:
+    server-base: ${wcs.server.base:http://192.168.21.112:8011}
+  zone-code:
+    floor2: ${floor2.zone.code:Aenw}
+    floor3: ${floor3.zone.code:iM2N}
+
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/**/*Mapper.xml
+  type-aliases-package: com.si.upstream.dal.entity
+
+logging:
+  level:
+    com.si.upstream.dal.mapper: debug
+
+
+interface:
+  platform:
+    ip: 192.168.21.112
+    port: 9002
+
+wcs:
+  si:
+    ip: 192.168.21.112
+    port: 8073
+
+task:
+  cron:
+    floor3: 0/5 * * * * ?
+    floor2: 0/5 * * * * ?
